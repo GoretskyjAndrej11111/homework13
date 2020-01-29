@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>homework13</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 100px 0 0;
+        }
+        .lever1 {
+            width: 800px;
+            margin: 0 auto;
+        }
+        .squares {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .square {
+            height: 100px;
+            width: 100px;
+            border: 1px solid silver;
+            margin-bottom: 15px;
+        }
+        p {
+            text-align: center;
+        }
+        .buttons {
+         text-align: center;   
+        }
+        .lever2 {
+            width: 800px;
+            margin: 0 auto;
+        }
+        .color {
+            width: 100px;
+            height: 100px;
+            border: 1px solid silver;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+   <div class="lever1">
+       <div class="squares">
+          <div id="square-1" data-attr="#square-1" class="square">
+            <p class="value">0</p>
+            <div class="buttons">
+                <button class="btn-plus">+</button>
+                <button class="btn-minus">-</button>
+            </div>
+        </div>
+        <div id="square-2" data-attr="#square-2" class="square">
+            <p class="value">0</p>
+            <div class="buttons">
+                <button class="btn-plus">+</button>
+                <button class="btn-minus">-</button>
+            </div>
+        </div>
+        <div id="square-3" data-attr="#square-3" class="square">
+            <p class="value">0</p>
+            <div class="buttons">
+                <button class="btn-plus">+</button>
+                <button class="btn-minus">-</button>
+            </div>
+        </div>
+        <div id="square-4" data-attr="#square-4" class="square">
+            <p class="value">0</p>
+            <div class="buttons">
+                <button class="btn-plus">+</button>
+                <button class="btn-minus">-</button>
+            </div>
+        </div>     
+        <div id="square-5" data-attr="#square-5" class="square">
+            <p class="value">0</p>
+            <div class="buttons">
+                <button class="btn-plus">+</button>
+                <button class="btn-minus">-</button>
+            </div>
+        </div>         
+       </div>       
+   </div>
+   <div class="lever2">
+       <div class="squares">
+            <div data-index="0" class="color"></div>
+            <div data-index="0" class="color"></div>
+            <div data-index="0" class="color"></div>
+            <div data-index="0" class="color"></div>
+            <div data-index="0" class="color"></div>
+        </div>
+   </div>
+   
+        
+<script>
+    let $squares = document.querySelectorAll('.square');
+
+        $squares.forEach($square => {
+            $square.addEventListener('click', function(e) {
+                let attr = this.dataset.attr;
+                let index = Number(document.querySelector(`${attr}.square .value`).textContent);
+
+                if(e.target.classList.contains('btn-minus')) {
+                    if(index <= 0) {
+                        index = 0;
+                    } else {
+                        document.querySelector(`${attr}.square .value`).textContent = --index;
+                    }
+                } else {
+                    document.querySelector(`${attr}.square .value`).textContent = ++index;
+                }             
+            })
+        });
+    
+    let $color = document.querySelectorAll('.color');
+
+
+        $color.forEach($color => {
+            $color.addEventListener('click', function(e) {
+                let colors = ['blue', 'green', 'yellow'];
+                if(this.dataset.index <= colors.length-1) {
+                    this.style.backgroundColor = colors[this.dataset.index];
+                    this.dataset.index = Number(this.dataset.index)+1;
+                    this.parentNode.appendChild(this);
+                } else {
+                    this.dataset.index = '1';
+                    this.style.backgroundColor = colors[0];
+                    this.parentNode.appendChild(this);
+                }
+            });
+            
+        })
+</script>     
+    
+</body>
+</html>
